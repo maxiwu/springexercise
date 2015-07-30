@@ -22,6 +22,11 @@ public class HomeController {
 	public String thisIsHome() {
 		return "home";
 	}
+	
+	@RequestMapping(value = "/login")
+	public String login() {
+		return "login";
+	}
 
 	/*@RequestMapping("/getResources")
 	public void getSomthing(HttpServletRequest request,

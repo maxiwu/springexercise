@@ -1,4 +1,4 @@
-/*package umedia.test.oauth.configuration;
+package umedia.test.oauth.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebMvcSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
+	//user store?
+    @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("marissa").password("koala").roles("USER").and().withUser("paul")
                 .password("emu").roles("USER");
@@ -33,12 +34,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    //how user login rule, authorities
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
                  http
             .authorizeRequests()
-                .antMatchers("/login.jsp").permitAll()
+                .antMatchers("/login").permitAll()
                 .anyRequest().hasRole("USER")
                 .and()
             .exceptionHandling()
@@ -50,12 +52,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
             .logout()
             	.logoutUrl("/logout")
-                .logoutSuccessUrl("/login.jsp")
+                .logoutSuccessUrl("/login")
                 .and()
             .formLogin()
             	.loginProcessingUrl("/login")
                 .failureUrl("/login.jsp?authentication_error=true")
-                .loginPage("/login.jsp");
+                .loginPage("/login");
         // @formatter:on
     }
-}*/
+}
